@@ -1,4 +1,4 @@
-import { hycolor, hygraphic } from "./globalEnum";
+import { hycolor, hygraphic } from "./globalEnum.js";
 
 export interface timestamp {
   show?: boolean;
@@ -7,15 +7,15 @@ export interface timestamp {
 
 export interface preset {
   str?: string;
-  color: hycolor;
-  graphic: hygraphic;
+  color?: hycolor;
+  graphic?: hygraphic;
   outputColor?: hycolor;
   outputGraphic?: hygraphic;
 }
 
 export interface properties {
-  timestamp: timestamp;
-  preset: {
+  timestamp?: timestamp;
+  presets?: {
     [key: string]: preset;
   };
 }

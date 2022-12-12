@@ -2,7 +2,7 @@
   "name": "hylogs",
   "version": "0.4.0",
   "description": "Easy to use and highly customizable console.log for JavaScript and TypeScript",
-  "main": "src/main.ts",
+  "main": "dist/main.ts",
   "scripts": {
     "start": "nodemon --exec npm run build",
     "push": "git add * && git commit -m 'maj' && git push",

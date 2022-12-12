@@ -1,13 +1,19 @@
-import { hycolor, hygraphic } from "../assets/globalEnum";
-import getPrefix from "../functions/getPrefix";
-import getTimestamp from "../functions/getTimestamp";
-export class Hy {
-    properties = {
+import { hycolor, hygraphic } from "../assets/globalEnum.js";
+import getPrefix from "../functions/getPrefix.js";
+export default class Hy {
+    static properties = {
         timestamp: {
             show: true,
             format: "dd/mm/yyyy - hh:mm:ss",
         },
-        preset: {
+        presets: {
+            clear: {
+                str: "Am here !",
+                color: hycolor.None,
+                graphic: hygraphic.None,
+                outputColor: hycolor.None,
+                outputGraphic: hygraphic.None,
+            },
             base: {
                 str: "Am here !",
                 color: hycolor.None,
@@ -17,54 +23,63 @@ export class Hy {
             },
         },
     };
-    constructor() { }
-    log(output, preset, color, graphic) {
-        let prefix = `\x1b[${graphic};${color}m[ ${getTimestamp()} ] →\x1b[${hygraphic.None};${hycolor.None}m\n`;
+    static colors = hycolor;
+    static graphic = hygraphic;
+    static log(output, preset, presetName) {
         if (this.properties.timestamp.show) {
-            console.log(prefix, output);
+            console.log(getPrefix(this.properties.presets?.[presetName] ||
+                preset ||
+                this.properties.presets.base), output);
         }
         else {
             console.log(output);
         }
     }
-    table(output, preset, color, graphic, outputColor, outputGraphic) {
+    static table(output, preset, presetName) {
         if (this.properties.timestamp.show) {
-            console.log(getPrefix(preset || {
-                color: color,
-                graphic: graphic,
-                outputColor: outputColor,
-                outputGraphic: outputGraphic,
-            }));
+            console.log(getPrefix(this.properties.presets?.[presetName] ||
+                preset ||
+                this.properties.presets.base));
             console.table(output);
         }
         else {
             console.table(output);
         }
     }
-    changeTimestamp({ show, format }) {
+    rainbow() { }
+    static changeTimestamp({ show, format }) {
         this.properties.timestamp = { show, format };
     }
-    addPreset(name, preset) {
-        if (!this.properties.preset[name]) {
-            this.properties.preset[name] = preset;
+    static addPreset(name, preset) {
+        if (!this.properties.presets[name]) {
+            this.properties.presets[name] = {
+                ...this.properties.presets.base,
+                ...preset,
+            };
         }
         else {
             console.error("Mec, ce nom est déjà pris");
         }
     }
-    changePreset(name, preset) {
-        if (this.properties.preset[name]) {
-            this.properties.preset[name] = preset;
+    static changePreset(name, preset) {
+        if (this.properties.presets[name] && name === "clear") {
+            this.properties.presets[name] = preset;
         }
         else {
             console.error("Mec, ce preset n'existe pas");
         }
     }
-    removePreset(name) {
-        delete this.properties.preset[name];
+    static removePreset(name) {
+        delete this.properties.presets[name];
     }
-    changeDefault({ str, color, graphic, outputColor, outputGraphic }) {
-        this.properties.preset.base = {
+    static getPresets() {
+        console.log(this.properties.presets);
+    }
+    static returnPresets() {
+        return this.properties.presets;
+    }
+    static changeDefault({ str, color, graphic, outputColor, outputGraphic, }) {
+        this.properties.presets.base = {
             str,
             color,
             graphic,
@@ -72,8 +87,8 @@ export class Hy {
             outputGraphic,
         };
     }
-    resetDefault() {
-        this.properties.preset.base = {
+    static resetDefault() {
+        this.properties.presets.base = {
             str: "Am here !",
             color: hycolor.None,
             graphic: hygraphic.None,
