@@ -1,0 +1,6 @@
+{
+    "restartable": "rs",
+    "ignore":["dist/**"],
+    "watch":["src/**", "tsconfig.*"],
+    "ext": "ts,json"
+}

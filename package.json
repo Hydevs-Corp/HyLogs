@@ -1,0 +1,29 @@
+{
+  "name": "hylogs",
+  "version": "0.4.0",
+  "description": "Easy to use and highly customizable console.log for JavaScript and TypeScript",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "nodemon --exec npm run build",
+    "push": "git add * && git commit -m 'maj' && git push",
+    "build": "tsc && node ./dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hydevs-Corp/HyLogs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Hydevs-Corp/HyLogs/issues"
+  },
+  "homepage": "https://github.com/Hydevs-Corp/HyLogs#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.10",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

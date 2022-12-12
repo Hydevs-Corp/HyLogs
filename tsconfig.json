@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "module": "ES2022",
+      "moduleResolution": "Classic",
+      "target": "ES2022",
+      "sourceMap": true,
+      "moduleSuffixes": [".ts", ""],
+      "outDir": "dist",
+    },
+    "include": ["src/**/*"],
+  }
